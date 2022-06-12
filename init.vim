@@ -32,15 +32,12 @@ call plug#end()
 set termguicolors
 lua require'colorizer'.setup()
 
-let ConfigFiles = ['/plug-config/coc.vim','/plug-config/airline.vim','/my_vimrc.vim','/plug-config/fzf.vim']
-
 if has('win32')
-    source C:\Users\<user_name>\AppData\Local\nvim\plug-config\airline.vim
-    source C:\Users\<user_name>\AppData\Local\nvim\my_vimrc.vim
-    source C:\Users\<user_name>\AppData\Local\nvim\plug-config\fzf.vim
-    source C:\Users\<user_name>\AppData\Local\nvim\plugin\localvimrc.vim
+    let ConfigFiles = ['\\plug-config\\coc.vim','\\plug-config\\airline.vim','\\my_vimrc.vim','\\plug-config\\fzf.vim']
 else
-    for file in ConfigFiles
-        exec "source ".g:configPath.file
-    endfor
+    let ConfigFiles = ['/plug-config/coc.vim','/plug-config/airline.vim','/my_vimrc.vim','/plug-config/fzf.vim']
 endif
+for file in ConfigFiles
+    exec "source ".g:configPath.file
+endfor
+
