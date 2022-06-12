@@ -2,7 +2,9 @@
 nmap <C-v> "*p
 vnoremap <C-c> "*y
 
-set shell=cmd
+if has('win32')
+    set shell=cmd
+endif
 set number
 set relativenumber
 set list

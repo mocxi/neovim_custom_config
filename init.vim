@@ -1,5 +1,7 @@
-" call plug#begin('C:\Users\huy.lehuu\AppData\Local\nvim\plugged')
-call plug#begin('C:\Users\huy.lehuu\AppData\Local\nvim\plugged')
+let g:configPath = '/root/.config/nvim'
+" set $CONFIG_PATH=/root/.config/nvim
+
+call plug#begin(g:configPath.'/autoload/plugged')
 " below are some vim plugins for demonstration purpose.
 " add the plugin you want to use here.
     Plug 'preservim/nerdtree'
@@ -21,26 +23,24 @@ call plug#begin('C:\Users\huy.lehuu\AppData\Local\nvim\plugged')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
     Plug 'beyondwords/vim-twig'
-    Plug 'vim-vdebug/vdebug'
+    " Plug 'vim-vdebug/vdebug'
 call plug#end()
 
 " let $GIT_TERMINAL_PROMPT=0
 
 
-if has('win32')
-    set termguicolors
-endif
-
+set termguicolors
 lua require'colorizer'.setup()
 
-source C:\Users\huy.lehuu\AppData\Local\nvim\plug-config\coc.vim
-source C:\Users\huy.lehuu\AppData\Local\nvim\plug-config\airline.vim
+let ConfigFiles = ['/plug-config/coc.vim','/plug-config/airline.vim','/my_vimrc.vim','/plug-config/fzf.vim']
 
-" Huy.LH define
-source C:\Users\huy.lehuu\AppData\Local\nvim\my_vimrc.vim
-" set shell="C:\Program Files\Git\git-bash.exe"
-
-source C:\Users\huy.lehuu\AppData\Local\nvim\plug-config\fzf.vim
-
-" plugin
-source C:\Users\huy.lehuu\AppData\Local\nvim\plugin\localvimrc.vim
+if has('win32')
+    source C:\Users\<user_name>\AppData\Local\nvim\plug-config\airline.vim
+    source C:\Users\<user_name>\AppData\Local\nvim\my_vimrc.vim
+    source C:\Users\<user_name>\AppData\Local\nvim\plug-config\fzf.vim
+    source C:\Users\<user_name>\AppData\Local\nvim\plugin\localvimrc.vim
+else
+    for file in ConfigFiles
+        exec "source ".g:configPath.file
+    endfor
+endif

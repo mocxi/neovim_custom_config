@@ -8,9 +8,14 @@ Including:
 
 Installation
 -----------------
+# Config
+
+update path to plugged dir in `./init.vim`
+```
+call plug#begin('~/.config/nvim/autoload/plugged')
+```
+
 # Install tool
-
-
 ## Windows
 - Install ripgrep (choco install ripgrep)
 - Install fzf (choco install fzf)
@@ -19,6 +24,7 @@ Clone the repository to your nvim config directory
 ```
 C:\Users\<user_name>\AppData\Local\nvim
 ```
+
 Run `:PlugInstall`
 
 ## Linux
