@@ -16,9 +16,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 ```
 
 # Install tool
+
 ## Windows
+You may need both at host and WSL
 - Install ripgrep (choco install ripgrep)
 - Install fzf (choco install fzf)
+- Install bat (choco install bat)
 
 Clone the repository to your nvim config directory
 ```

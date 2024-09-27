@@ -120,6 +120,11 @@
     "Zend OPcache",
     "zip",
     "zlib",
-    "Memcached"
+    "Memcached",
+    "Memcache",
+    "RedisCluster",
+    "Redis",
+    "Predis",
+    "rand"
   ]
 }
