@@ -125,6 +125,8 @@
     "RedisCluster",
     "Redis",
     "Predis",
-    "rand"
+    "rand",
+    "random"
   ]
 }
+

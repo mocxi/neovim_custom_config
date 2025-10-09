@@ -10,11 +10,6 @@ Installation
 -----------------
 # Config
 
-update path to plugged dir in `./init.vim`
-```
-call plug#begin('~/.config/nvim/autoload/plugged')
-```
-
 # Install tool
 
 ## Windows
@@ -34,10 +29,10 @@ Run `:PlugInstall`
 - Install ripgrep
 - Install fzf
 
-Clone the repository to your nvim config directory
-```
-\home\<user_name>\.config\nvim
-```
+Clone the repository to your nvim config directory:
+- Linux: `\home\user.name\.config\nvim`
+- Windows: `C:\Users\user.name\AppData\Local\nvim`
+
 Run `:PlugInstall`
 
 # Addition settup
@@ -55,6 +50,7 @@ pip install -U jedi-language-server
 ```
 
 ## php
+(vdebug is not functional so skip it)
 install vdebug
 install plugin from python: https://github.com/neovim/pynvim
 
@@ -62,8 +58,19 @@ install plugin from python: https://github.com/neovim/pynvim
 pip3 install pynvim
 ```
 
+## Fsharp
+
+require dotnet: https://dotnet.microsoft.com/en-us/download
+
+install autocomplete:
+```
+dotnet tool install -g fsautocomplete
+```
+
 Reference
 ---------
 https://github.com/BurntSushi/ripgrep#installation
 https://github.com/junegunn/fzf
 https://github.com/junegunn/vim-plug
+https://github.com/ionide/Ionide-vim
+https://github.com/autozimu/LanguageClient-neovim

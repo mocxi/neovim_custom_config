@@ -2,7 +2,8 @@
 
 " floating window size ratio
 let g:fzf_preview_floating_window_rate = 0.9
-
+" let g:fzf_window = { 'width': 0.8, 'height': 0.6 }
+let g:fzf_window = ['up:100%']
 " fzf window position settings
 let g:fzf_preview_direct_window_option = ''
 
@@ -120,4 +121,5 @@ xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrepRpc<Space>-F<Space>"<C-r
 nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTagsRpc<CR>
 nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFixRpc<CR>
 nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationListRpc<CR>
+
 

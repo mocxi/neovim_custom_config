@@ -36,7 +36,7 @@ let g:fzf_colors =
 
 "Get Files
 command! -bang -nargs=? -complete=dir Files
-            \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline', '--preview', 'cat --color=always {1} --highlight-line {2}']}), <bang>0)
+            \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline', '--preview', 'bat --color=always {1} --highlight-line {2}']}), <bang>0)
 
 function! s:find_git_root()
     if has('win32')
@@ -83,7 +83,16 @@ function! RipgrepFzfPath(fullscreen, path)
       return 1
   endif
 
-  let spec = {'dir': a:path, 'options': ['--phony', '--query','', '--bind', 'change:reload:'.reload_command]}
+  let spec = {
+      'dir': a:path,
+      'options': [
+          '--phony',
+          '--query',
+          '',
+          '--bind',
+          'change:reload:'.reload_command
+          ]
+  }
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(), a:fullscreen)
 endfunction
 
@@ -97,4 +106,5 @@ command! -bang -nargs=* GGrep
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
 " end fzf
+
 
