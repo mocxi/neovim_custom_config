@@ -46,7 +46,7 @@ vim.keymap.set(
     'n',
     '<leader>fj',
     function()
-        vim.cmd(':%!python -m json.tool --no-ensure-ascii')
+        vim.cmd(':%!' .. (vim.fn.has('win32') == 1 and 'python' or 'python3') .. ' -m json.tool --no-ensure-ascii')
     end
 )
 

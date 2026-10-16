@@ -1,6 +1,9 @@
 local vim = vim
 
 local Plug = vim.fn['plug#']
+local function sourceLuaFile(file_path)
+  vim.cmd('source '..vim.fn.stdpath('config')..file_path)
+end
 
 vim.call('plug#begin')
 
@@ -14,6 +17,14 @@ Plug('https://github.com/junegunn/vim-easy-align.git')
 
 -- Using a non-default branch
 Plug('neoclide/coc.nvim', { ['branch'] = 'release' })
+
+-- AI
+Plug('milanglacier/minuet-ai.nvim')
+Plug('nvim-lua/plenary.nvim')
+Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
+Plug('olimorris/codecompanion.nvim', { ['branch'] = 'main' })
+Plug('github/copilot.vim')
+Plug 'kkharji/sqlite.lua'
 
 -- F#
 -- require: `dotnet tool install -g fsautocomplete`
@@ -61,11 +72,23 @@ vim.call('plug#end')
 -- Color schemes should be loaded after plug#end().
 -- We prepend it with 'silent!' to ignore errors when it's not yet installed.
 require("my_vimrc")
+require("deps_check")
 require'colorizer'.setup()
 require'plug-config.coc'
 require'plug-config.fzf_config'
 require'plug-config.airline'
+require'plug-config.minuet'
+require'plug-config.codecompanion'
+require'plug-config.github_copilot'
 -- vim.cmd('source '..vim.fn.stdpath('config')..'/plugin/WindowSwap.vim')
-vim.cmd('source '..vim.fn.stdpath('config')..'/plug-config/fzf.vim')
-vim.cmd('source '..vim.fn.stdpath('config')..'/plug-config/fzf_preview.vim')
-vim.cmd('source '..vim.fn.stdpath('config')..'/plug-config/ionide.vim')
+sourceLuaFile('/plug-config/fzf.vim')
+sourceLuaFile('/plug-config/fzf_preview.vim')
+
+if vim.fn.has('win32') == 1 then
+    vim.g.sqlite_clib_path = 'C:\\Users\\huy.lehuu\\AppData\\Local\\sqlite\\sqlite3.dll'
+end
+
+-- for F# Ionide
+_G.TriggerIonide = function()
+    sourceLuaFile('/plug-config/ionide.vim')
+end

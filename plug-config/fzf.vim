@@ -1,6 +1,7 @@
 " FZF
 " This is the default extra key bindings
-map <C-f> :Files<CR>
+map <C-f> :RGG<CR>
+map <C-f>f :Files<CR>
 map <C-p> :ProjectFiles<CR>
 map <leader>b :Buffers<CR>
 nnoremap <leader>g :Rg<CR>
@@ -53,12 +54,13 @@ function! s:find_git_root()
 " Get text in files with Rg
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
 " Ripgrep advanced
+" command! -bang -nargs=* RG call fzf#vim#grep2("rg --column --line-number --no-heading --color=always --smart-case -- ", <q-args>, fzf#vim#with_preview(), <bang>0)'
 function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
   let spec = {'options':
@@ -67,10 +69,10 @@ function! RipgrepFzf(query, fullscreen)
               \ '--preview', 'bat --color=always {1} --highlight-line {2}'
               \ ]
           \ }
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(), a:fullscreen)
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+command! -nargs=* -bang RGG call RipgrepFzf(<q-args>, <bang>0)
 
 function! RipgrepFzfPath(fullscreen, path)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
@@ -102,7 +104,7 @@ command! -bang -nargs=1 -bang -complete=dir Rgp call RipgrepFzfPath(<bang>0, <q-
 " Git grep
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
-  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   'git grep --line-number -- '.fzf#shellescape(<q-args>),
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
 " end fzf
